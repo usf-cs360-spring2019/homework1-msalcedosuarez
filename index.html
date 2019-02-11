@@ -106,7 +106,7 @@
         var chart = d3.select(".chart")
             .attr("width", width);
 
-        d3.tsv("D3_CHart3_HW1.tsv", type, function(error, data) {
+        d3.tsv("D3_Chart3_HW1 - Sheet1.tsv", type, function(error, data) {
           x.domain([0, d3.max(data, function(d) { return d.value; })]);
 
           chart.attr("height", barHeight * data.length);
