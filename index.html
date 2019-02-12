@@ -72,42 +72,41 @@
   </section>
 
 
-
-
 <section class="section">
-  <div class="container content">
+
+  <div id="visual1">
     <h2>D3 Visualizations</h2>
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <style>
       .bar {
-        fill: #4e79a7;
+        fill: #D27899;
       }
     </style>
       <script>
+
       // set the dimensions and margins of the graph
-      var margin = {top: 20, right: 20, bottom: 30, left: 40},
+      var margin = {top: 50, right: 75, bottom: 50, left: 100},
           width = 960 - margin.left - margin.right,
           height = 500 - margin.top - margin.bottom;
 
       // set the ranges
       var x = d3.scaleBand()
                 .range([0, width])
-                .padding(0.1);
+                .padding(0.2);
       var y = d3.scaleLinear()
                 .range([height, 0]);
 
       // append the svg object to the body of the page
       // append a 'group' element to 'svg'
       // moves the 'group' element to the top left margin
-      var svg = d3.select("body").append("svg")
+      var svg = d3.select("#visual1").append("svg")
           .attr("width", width + margin.left + margin.right)
           .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-          .attr("transform",
-                "translate(" + margin.left + "," + margin.top + ")");
+          .append("g")
+          .attr("transform","translate(" + margin.left + "," + margin.top + ")");
 
-      // get the data
-      d3.csv("data1.csv").then(function(data) {
+        // get the data
+        d3.csv("data1.csv").then(function(data) {
         console.log(data);
 
         // format the data
@@ -122,12 +121,18 @@
         // append the rectangles for the bar chart
         svg.selectAll(".bar")
             .data(data)
-          .enter().append("rect")
+            .enter().append("rect")
             .attr("class", "bar")
             .attr("x", function(d) { return x(d.Neighborhood); })
             .attr("width", x.bandwidth())
             .attr("y", function(d) { return y(d.Saturday); })
             .attr("height", function(d) { return height - y(d.Saturday); });
+
+        svg.append("text")
+          .attr("font-size", "25px")
+          .attr("transform","translate(" + (width/50) + " ," + (margin.top/40) + ")")
+          .style("text-anchor", "right")
+          .text("Larceny Theft on Saturday")
 
         // add the x Axis
         svg.append("g")
@@ -138,19 +143,122 @@
         svg.append("g")
             .call(d3.axisLeft(y));
 
+        svg.append("text")
+          .attr("transform", "rotate(-90)")
+          .attr("y", 0 - margin.left)
+          .attr("x",0 - (height / 2))
+          .attr("dy", "1em")
+          .style("text-anchor", "middle")
+          .text("Number of Records");
+
+        // text label for the x axis
+        svg.append("text")
+          .attr("transform","translate(" + (width/2) + " ," + (margin.top/24) + ")")
+          .style("text-anchor", "middle")
+          .text("Saturday");
+
       });
+
+
+      //____________________1______________________________
 
       </script>
       </div>
+</section>
+
+
+
+<section class="section2">
+      <div id="visual2">
+        <script src="https://d3js.org/d3.v5.min.js"></script>
+        <style>
+          .bar2 {
+            fill: #808080;
+          }
+        </style>
+          <script>
+
+          // set the dimensions and margins of the graph
+          var margin = {top: 50, right: 75, bottom: 50, left: 100},
+              width = 960 - margin.left - margin.right,
+              height = 500 - margin.top - margin.bottom;
+
+          // set the ranges
+          var x = d3.scaleBand()
+                    .range([0, width])
+                    .padding(0.2);
+          var y = d3.scaleLinear()
+                    .range([height, 0]);
+
+          // append the svg object to the body of the page
+          // append a 'group' element to 'svg'
+          // moves the 'group' element to the top left margin
+          var svg2 = d3.select("#visual2").append("svg")
+              .attr("width", width + margin.left + margin.right)
+              .attr("height", height + margin.top + margin.bottom)
+              .append("g")
+              .attr("transform","translate(" + margin.left + "," + margin.top + ")");
+
+            // get the data
+            d3.csv("data1.csv").then(function(data) {
+            console.log(data);
+
+            // format the data
+            data.forEach(function(d) {
+              d.Saturday = +d.Saturday;
+            });
+
+            // Scale the range of the data in the domains
+            x.domain(data.map(function(d) { return d.Neighborhood; }));
+            y.domain([0, d3.max(data, function(d) { return d.Saturday; })]);
+
+            // append the rectangles for the bar chart
+            svg2.selectAll(".bar2")
+                .data(data)
+                .enter().append("rect")
+                .attr("class", "bar2")
+                .attr("x", function(d) { return x(d.Neighborhood); })
+                .attr("width", x.bandwidth())
+                .attr("y", function(d) { return y(d.Saturday); })
+                .attr("height", function(d) { return height - y(d.Saturday); });
+
+            svg2.append("text")
+              .attr("font-size", "25px")
+              .attr("transform","translate(" + (width/50) + " ," + (margin.top/40) + ")")
+              .style("text-anchor", "right")
+              .text("Larceny Theft on Saturday")
+
+            // add the x Axis
+            svg2.append("g")
+                .attr("transform", "translate(0," + height + ")")
+                .call(d3.axisBottom(x));
+
+            // add the y Axis
+            svg2.append("g")
+                .call(d3.axisLeft(y));
+
+            svg2.append("text")
+              .attr("transform", "rotate(-90)")
+              .attr("y", 0 - margin.left)
+              .attr("x",0 - (height / 2))
+              .attr("dy", "1em")
+              .style("text-anchor", "middle")
+              .text("Number of Records");
+
+            // text label for the x axis
+            svg2.append("text")
+              .attr("transform","translate(" + (width/2) + " ," + (margin.top/24) + ")")
+              .style("text-anchor", "middle")
+              .text("Saturday");
+
+          });
+
+
+          //_________________________2_________________________
+
+          </script>
+          </div>
     </section>
-
-
-
-
-
-
-
-
 
 
 
@@ -162,10 +270,19 @@
       <h2>Prototypes</h2>
 
       <img src="Visualization1HW1.jpg" alt="" width="100%" height="400">
+      <b>
+        This visualization represents the Top 5 neighborhoods in San Francisco with the most larceny offenses per day on the weekends.
+      </b>
 
       <img src="Visualization2HW1.jpg" alt="" width="100%" height="400">
+      <b>
+        This visualization represents larceny theft throughout the day taking place in San Francisco. We see how the number of cases increases as the day goes on and reaches its peak late at night.
+      </b>
 
       <img src="Visualization3HW1.jpg" alt="" width="100%" height="400">
+      <b>
+        This visualization represents the type of incidents happening in the Tenderloin by category.
+      </b>
 
       <h3>Interpretation</h3>
 
@@ -219,7 +336,7 @@
             </td>
 
             <td>
-              If appropriate, provide a brief justification for this level of functionality. Clearly state if this level was not implemented.
+              Level Functionality Completed. Three prototypes were created.
             </td>
           </tr>
 
@@ -234,14 +351,14 @@
             </td>
 
             <td>
-              If appropriate, provide a brief justification for this level of functionality. Clearly state if this level was not implemented.
+              Level Functionality Completed. One of the prototypes created in D3.
             </td>
           </tr>
 
           <!-- b level functionality -->
           <tr>
             <td class="has-text-centered">
-              <i class="far fa-fw fa-times-circle has-text-danger"></i>
+              <i class="far fa-fw fa-check-circle has-text-success"></i>
             </td>
 
             <td class="has-text-centered">
@@ -249,7 +366,7 @@
             </td>
 
             <td>
-              If appropriate, provide a brief justification for this level of functionality. Clearly state if this level was not implemented.
+              Level Functionality Completed. Two of the prototypes created in D3.
             </td>
           </tr>
 
@@ -265,7 +382,7 @@
             </td>
 
             <td>
-              If appropriate, provide a brief justification for this level of functionality. Clearly state if this level was not implemented.
+              Level was not implemented.
             </td>
           </tr>
         <tbody>
