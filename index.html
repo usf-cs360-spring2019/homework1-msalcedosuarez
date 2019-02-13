@@ -68,7 +68,7 @@
       </div>
     </div>
   </section>
-
+<p><br/>
   <section class="section1">
         <div class="container content">
           <h2>Data Visualizations</h2>
@@ -165,7 +165,7 @@
       </script>
       <script>
 
-          var margin3 = {top3: 20, right3: 20, bottom3: 30, left3: 200},
+          var margin3 = {top3: 60, right3: 20, bottom3: 20, left3: 200},
             width3 = 960 - margin3.left3 - margin3.right3,
             height3 = 500 - margin3.top3 - margin3.bottom3;
 
@@ -214,6 +214,25 @@
           // Add the Y Axis
           svg3.append("g")
               .call(d3.axisLeft(y3));
+
+          svg3.append("text")
+              .attr("transform","translate(" + (width3/2) + " ," + (margin3.top3-40) + ")")
+              .style("text-anchor", "front")
+              .text("Incident Time");
+
+          svg3.append("text")
+              .attr("font-size", "25px")
+              .attr("transform","translate(" + (width3-800) + " ," + (margin3.top3-70) + ")")
+              .style("text-anchor", "right")
+              .text("Occurences of Larceny Theft by Time")
+
+          svg3.append("text")
+              .attr("transform", "rotate(-90)")
+              .attr("y", 125 - margin3.left3)
+              .attr("x",0 - (height / 2))
+              .attr("dy", "1em")
+              .style("text-anchor", "middle")
+              .text("Number of Records");
 
           });
 
@@ -314,7 +333,7 @@
         </script>
       </div>
   </section>
-  
+
   <!-- todo: add sections as necessary -->
   <section class="section">
     <div class="container content">
