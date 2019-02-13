@@ -170,10 +170,6 @@
         {"crime":"Non-Criminal","records":84},{"crime":"Assault","records":105},{"crime":"Other Miscellaneous","records":113},
         {"crime":"Warrant","records":117},{"crime":"Drug Offense","records":123},{"crime":"Larceny Theft","records":287}];
 
-          // // get the data
-          // d3.csv("data3.csv").then(function(data) {
-          // console.log(data);
-
           // set the dimensions and margins of the graph
           var margin2 = {top2: 30, right2: 20, bottom2: 50, left2: 200},
             width2 = 960 - margin2.left2 - margin2.right2,
@@ -196,10 +192,6 @@
             .append("g")
             .attr("transform","translate(" + margin2.left2 + "," + margin2.top2 + ")");
 
-          // format the data
-          data2.forEach(function(d2) {
-            d2.records = +d2.records;
-          });
 
           // Scale the range of the data in the domains
           x2.domain([0, d3.max(data2, function(d2){ return d2.records; })])
@@ -251,6 +243,9 @@
         </script>
       </div>
   </section>
+  <p><br/>
+    <p><br/>
+      <p><br/>
   <section class="section3">
     <div id="visual3">
       <script src="https://d3js.org/d3.v5.min.js"></script>
