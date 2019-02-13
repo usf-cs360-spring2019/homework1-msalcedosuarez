@@ -81,71 +81,71 @@
               }
             </style>
         <script>
-          // set the dimensions and margins of the graph
-          var margin = {top: 30, right: 20, bottom: 30, left: 200},
-              width = 960 - margin.left - margin.right,
-              height = 500 - margin.top - margin.bottom;
-          // set the ranges
-          var x = d3.scaleBand()
-                    .range([0, width])
-                    .padding(0.1);
-          var y = d3.scaleLinear()
-                    .range([height, 0]);
-          // append the svg object to the body of the page
-          // append a 'group' element to 'svg'
-          // moves the 'group' element to the top left margin
-          var svg = d3.select("body").append("svg")
-              .attr("width", width + margin.left + margin.right)
-              .attr("height", height + margin.top + margin.bottom)
-              .append("g")
-              .attr("transform",
-                    "translate(" + margin.left + "," + margin.top + ")");
-          // get the data
-          d3.csv("data1.csv").then(function(data) {
-            console.log(data);
-            // format the data
-            data.forEach(function(d) {
-              d.Saturday = +d.Saturday;
-            });
-            // Scale the range of the data in the domains
-            x.domain(data.map(function(d) { return d.Neighborhood; }));
-            y.domain([0, d3.max(data, function(d) { return d.Saturday; })]);
-            // append the rectangles for the bar chart
-            svg.selectAll(".bar")
-              .data(data)
-              .enter().append("rect")
-              .attr("class", "bar")
-              .attr("x", function(d) { return x(d.Neighborhood); })
-              .attr("width", x.bandwidth())
-              .attr("y", function(d) { return y(d.Saturday); })
-              .attr("height", function(d) { return height - y(d.Saturday); });
-            // add the x Axis
-            svg.append("g")
-              .attr("transform", "translate(0," + height + ")")
-              .call(d3.axisBottom(x));
-            // add the y Axis
-            svg.append("g")
-              .call(d3.axisLeft(y));
-
-            svg.append("text")
-              .attr("font-size", "25px")
-              .attr("transform","translate(" + (width-800) + " ," + (margin.top-35) + ")")
-              .style("text-anchor", "right")
-              .text("Larceny Theft on Saturday")
-
-            svg.append("text")
-               .attr("transform", "rotate(-90)")
-               .attr("y", 150 - margin.left)
-               .attr("x",0 - (height / 2))
-               .attr("dy", "1em")
-               .style("text-anchor", "middle")
-               .text("Number of Records");
-             // text label for the x axis
-             svg.append("text")
-               .attr("transform","translate(" + (width/2) + " ," + (margin.top/24) + ")")
-               .style("text-anchor", "middle")
-               .text("Saturday");
-             });
+          // // set the dimensions and margins of the graph
+          // var margin = {top: 30, right: 20, bottom: 30, left: 200},
+          //     width = 960 - margin.left - margin.right,
+          //     height = 500 - margin.top - margin.bottom;
+          // // set the ranges
+          // var x = d3.scaleBand()
+          //           .range([0, width])
+          //           .padding(0.1);
+          // var y = d3.scaleLinear()
+          //           .range([height, 0]);
+          // // append the svg object to the body of the page
+          // // append a 'group' element to 'svg'
+          // // moves the 'group' element to the top left margin
+          // var svg = d3.select("body").append("svg")
+          //     .attr("width", width + margin.left + margin.right)
+          //     .attr("height", height + margin.top + margin.bottom)
+          //     .append("g")
+          //     .attr("transform",
+          //           "translate(" + margin.left + "," + margin.top + ")");
+          // // get the data
+          // d3.csv("data1.csv").then(function(data) {
+          //   console.log(data);
+          //   // format the data
+          //   data.forEach(function(d) {
+          //     d.Saturday = +d.Saturday;
+          //   });
+          //   // Scale the range of the data in the domains
+          //   x.domain(data.map(function(d) { return d.Neighborhood; }));
+          //   y.domain([0, d3.max(data, function(d) { return d.Saturday; })]);
+          //   // append the rectangles for the bar chart
+          //   svg.selectAll(".bar")
+          //     .data(data)
+          //     .enter().append("rect")
+          //     .attr("class", "bar")
+          //     .attr("x", function(d) { return x(d.Neighborhood); })
+          //     .attr("width", x.bandwidth())
+          //     .attr("y", function(d) { return y(d.Saturday); })
+          //     .attr("height", function(d) { return height - y(d.Saturday); });
+          //   // add the x Axis
+          //   svg.append("g")
+          //     .attr("transform", "translate(0," + height + ")")
+          //     .call(d3.axisBottom(x));
+          //   // add the y Axis
+          //   svg.append("g")
+          //     .call(d3.axisLeft(y));
+          //
+          //   svg.append("text")
+          //     .attr("font-size", "25px")
+          //     .attr("transform","translate(" + (width-800) + " ," + (margin.top-35) + ")")
+          //     .style("text-anchor", "right")
+          //     .text("Larceny Theft on Saturday")
+          //
+          //   svg.append("text")
+          //      .attr("transform", "rotate(-90)")
+          //      .attr("y", 150 - margin.left)
+          //      .attr("x",0 - (height / 2))
+          //      .attr("dy", "1em")
+          //      .style("text-anchor", "middle")
+          //      .text("Number of Records");
+          //    // text label for the x axis
+          //    svg.append("text")
+          //      .attr("transform","translate(" + (width/2) + " ," + (margin.top/24) + ")")
+          //      .style("text-anchor", "middle")
+          //      .text("Saturday");
+          //    });
         </script>
       </div>
     </section>
@@ -162,84 +162,84 @@
           </style>
       </script>
         <script>
-          var data2 = [{"crime":"Other","records":19},{"crime":"Recovered Vehicle","records":19},
-        {"crime":"Suspicious Occ","records":22},{"crime":"Missing Person","records":26},
-        {"crime":"Motor Vehicle Theft","records":27},{"crime":"Burglary","records":33},
-        {"crime":"Against Family and Children","records":35},{"crime":"Robbery","records":37},
-        {"crime":"Malicious Mischief","records":44},{"crime":"Lost Property","records":52},
-        {"crime":"Non-Criminal","records":84},{"crime":"Assault","records":105},{"crime":"Other Miscellaneous","records":113},
-        {"crime":"Warrant","records":117},{"crime":"Drug Offense","records":123},{"crime":"Larceny Theft","records":287}];
-
-          // set the dimensions and margins of the graph
-          var margin2 = {top2: 30, right2: 20, bottom2: 50, left2: 200},
-            width2 = 960 - margin2.left2 - margin2.right2,
-            height2 = 500 - margin2.top2 - margin2.bottom2;
-
-          // set the ranges
-          var y2 = d3.scaleBand()
-                  .range([height2, 0])
-                  .padding(0.2);
-
-          var x2 = d3.scaleLinear()
-                  .range([0, width2]);
-
-          // append the svg object to the body of the page
-          // append a 'group' element to 'svg'
-          // moves the 'group' element to the top left margin
-          var svg2 = d3.select("body").append("svg")
-            .attr("width", width2 + margin2.left2 + margin2.right2)
-            .attr("height", height2 + margin2.top2 + margin2.bottom2)
-            .append("g")
-            .attr("transform","translate(" + margin2.left2 + "," + margin2.top2 + ")");
-
-
-          // Scale the range of the data in the domains
-          x2.domain([0, d3.max(data2, function(d2){ return d2.records; })])
-          y2.domain(data2.map(function(d2) { return d2.crime; }));
-
-          // append the rectangles for the bar chart
-          svg2.selectAll(".bar2")
-              .data(data2)
-              .enter().append("rect")
-              .attr("class", "bar2")
-              .attr("width", function(d2) {return x2(d2.records); } )
-              .attr("y", function(d2) { return y2(d2.crime); })
-              .attr("height", y2.bandwidth());
-
-          // add the x Axis
-          svg2.append("g")
-              .attr("transform", "translate(0," + height2 + ")")
-              .call(d3.axisBottom(x2));
-
-          // add the y Axis
-          svg2.append("g")
-              .call(d3.axisLeft(y2));
-
-          svg2.append("text")
-              .attr("font-size", "23px")
-              .attr("transform","translate(" + (width2-870) + " ," + (margin2.top2-45) + ")")
-              .style("text-anchor", "right")
-              .text("Most Prevelant Incidents in the Tenderloin")
-
-          svg2.append("text")
-              .attr("transform","translate(" + (width2-870) + " ," + (margin2.top2/24) + ")")
-              .style("text-anchor", "front")
-              .text("Incident Category");
-
-          svg2.append("text")
-              .attr("transform","translate(" + (width2/2) + " ," + (margin2.top2/24) + ")")
-              .style("text-anchor", "front")
-              .text("Tenderloin");
-
-          svg2.append("text")
-              .attr("transform","translate(" + (width2/2-43) + " ," + (margin2.top2-45) + ")")
-              .style("text-anchor", "front")
-              .text("Analysis Neighborhood");
-
-          svg2.append("text")
-              .attr("transform","translate(" + (width2/2-43) + " ," + (margin2.bottom2+410) + ")")
-              .style("text-anchor", "front")
-              .text("Number of Records");
+        //   var data2 = [{"crime":"Other","records":19},{"crime":"Recovered Vehicle","records":19},
+        // {"crime":"Suspicious Occ","records":22},{"crime":"Missing Person","records":26},
+        // {"crime":"Motor Vehicle Theft","records":27},{"crime":"Burglary","records":33},
+        // {"crime":"Against Family and Children","records":35},{"crime":"Robbery","records":37},
+        // {"crime":"Malicious Mischief","records":44},{"crime":"Lost Property","records":52},
+        // {"crime":"Non-Criminal","records":84},{"crime":"Assault","records":105},{"crime":"Other Miscellaneous","records":113},
+        // {"crime":"Warrant","records":117},{"crime":"Drug Offense","records":123},{"crime":"Larceny Theft","records":287}];
+        //
+        //   // set the dimensions and margins of the graph
+        //   var margin2 = {top2: 30, right2: 20, bottom2: 50, left2: 200},
+        //     width2 = 960 - margin2.left2 - margin2.right2,
+        //     height2 = 500 - margin2.top2 - margin2.bottom2;
+        //
+        //   // set the ranges
+        //   var y2 = d3.scaleBand()
+        //           .range([height2, 0])
+        //           .padding(0.2);
+        //
+        //   var x2 = d3.scaleLinear()
+        //           .range([0, width2]);
+        //
+        //   // append the svg object to the body of the page
+        //   // append a 'group' element to 'svg'
+        //   // moves the 'group' element to the top left margin
+        //   var svg2 = d3.select("body").append("svg")
+        //     .attr("width", width2 + margin2.left2 + margin2.right2)
+        //     .attr("height", height2 + margin2.top2 + margin2.bottom2)
+        //     .append("g")
+        //     .attr("transform","translate(" + margin2.left2 + "," + margin2.top2 + ")");
+        //
+        //
+        //   // Scale the range of the data in the domains
+        //   x2.domain([0, d3.max(data2, function(d2){ return d2.records; })])
+        //   y2.domain(data2.map(function(d2) { return d2.crime; }));
+        //
+        //   // append the rectangles for the bar chart
+        //   svg2.selectAll(".bar2")
+        //       .data(data2)
+        //       .enter().append("rect")
+        //       .attr("class", "bar2")
+        //       .attr("width", function(d2) {return x2(d2.records); } )
+        //       .attr("y", function(d2) { return y2(d2.crime); })
+        //       .attr("height", y2.bandwidth());
+        //
+        //   // add the x Axis
+        //   svg2.append("g")
+        //       .attr("transform", "translate(0," + height2 + ")")
+        //       .call(d3.axisBottom(x2));
+        //
+        //   // add the y Axis
+        //   svg2.append("g")
+        //       .call(d3.axisLeft(y2));
+        //
+        //   svg2.append("text")
+        //       .attr("font-size", "23px")
+        //       .attr("transform","translate(" + (width2-870) + " ," + (margin2.top2-45) + ")")
+        //       .style("text-anchor", "right")
+        //       .text("Most Prevelant Incidents in the Tenderloin")
+        //
+        //   svg2.append("text")
+        //       .attr("transform","translate(" + (width2-870) + " ," + (margin2.top2/24) + ")")
+        //       .style("text-anchor", "front")
+        //       .text("Incident Category");
+        //
+        //   svg2.append("text")
+        //       .attr("transform","translate(" + (width2/2) + " ," + (margin2.top2/24) + ")")
+        //       .style("text-anchor", "front")
+        //       .text("Tenderloin");
+        //
+        //   svg2.append("text")
+        //       .attr("transform","translate(" + (width2/2-43) + " ," + (margin2.top2-45) + ")")
+        //       .style("text-anchor", "front")
+        //       .text("Analysis Neighborhood");
+        //
+        //   svg2.append("text")
+        //       .attr("transform","translate(" + (width2/2-43) + " ," + (margin2.bottom2+410) + ")")
+        //       .style("text-anchor", "front")
+        //       .text("Number of Records");
         </script>
       </div>
   </section>
@@ -248,16 +248,72 @@
       <p><br/>
   <section class="section3">
     <div id="visual3">
-      <script src="https://d3js.org/d3.v5.min.js"></script>
+      <script src="http://d3js.org/d3.v4.js"></script>
           <style>
-            .bar3 {
+            /* .bar3 {
               fill: #A0E9EC;
-            }
+            } */
+            .line {
+                fill: none;
+                stroke: #A0E9EC;
+                stroke-width: 2px;
+              }
           </style>
       </script>
       <script>
+        // set the dimensions and margins of the graph
+        var margin = {top: 20, right: 20, bottom: 30, left: 50},
+          width = 960 - margin.left - margin.right,
+          height = 500 - margin.top - margin.bottom;
 
+        // set the ranges
+        var x = d3.scaleTime().range([0, width]);
+        var y = d3.scaleLinear().range([height, 0]);
 
+        // define the line
+        var valueline = d3.line()
+          .x(function(d) { return x(d.Time); })
+          .y(function(d) { return y(d.Records); });
+
+        // append the svg obgect to the body of the page
+        // appends a 'group' element to 'svg'
+        // moves the 'group' element to the top left margin
+        var svg = d3.select("body").append("svg")
+          .attr("width", width + margin.left + margin.right)
+          .attr("height", height + margin.top + margin.bottom)
+          .append("g")
+          .attr("transform","translate(" + margin.left + "," + margin.top + ")");
+
+        // Get the data
+        d3.csv("data2.csv", function(error, data) {
+        if (error) throw error;
+
+        // format the data
+        data.forEach(function(d) {
+            d.Time = +d.Time;
+            d.Records = +d.Records;
+        });
+
+        // Scale the range of the data
+        x.domain(d3.extent(data, function(d) { return d.Time; }));
+        y.domain([0, d3.max(data, function(d) { return d.Records; })]);
+
+        // Add the valueline path.
+        svg.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", valueline);
+
+        // Add the X Axis
+        svg.append("g")
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(x));
+
+        // Add the Y Axis
+        svg.append("g")
+            .call(d3.axisLeft(y));
+
+        });
       </script>
     </div>
   </section>
