@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <!-- head -->
 <head>
   <meta charset="utf-8">
@@ -10,7 +9,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" integrity="sha256-2pUeJf+y0ltRPSbKOeJh09ipQFYxUdct5nTY6GAXswA=" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 </head>
-
 <!-- body -->
 <body>
   <!-- header -->
@@ -71,197 +69,203 @@
     </div>
   </section>
 
-
-<section class="section">
-
-  <div id="visual1">
-    <h2>D3 Visualizations</h2>
-    <script src="https://d3js.org/d3.v5.min.js"></script>
-    <style>
-      .bar {
-        fill: #D27899;
-      }
-    </style>
-      <script>
-
-      // set the dimensions and margins of the graph
-      var margin = {top: 50, right: 75, bottom: 50, left: 100},
-          width = 960 - margin.left - margin.right,
-          height = 500 - margin.top - margin.bottom;
-
-      // set the ranges
-      var x = d3.scaleBand()
-                .range([0, width])
-                .padding(0.2);
-      var y = d3.scaleLinear()
-                .range([height, 0]);
-
-      // append the svg object to the body of the page
-      // append a 'group' element to 'svg'
-      // moves the 'group' element to the top left margin
-      var svg = d3.select("#visual1").append("svg")
-          .attr("width", width + margin.left + margin.right)
-          .attr("height", height + margin.top + margin.bottom)
-          .append("g")
-          .attr("transform","translate(" + margin.left + "," + margin.top + ")");
-
-        // get the data
-        d3.csv("data1.csv").then(function(data) {
-        console.log(data);
-
-        // format the data
-        data.forEach(function(d) {
-          d.Saturday = +d.Saturday;
-        });
-
-        // Scale the range of the data in the domains
-        x.domain(data.map(function(d) { return d.Neighborhood; }));
-        y.domain([0, d3.max(data, function(d) { return d.Saturday; })]);
-
-        // append the rectangles for the bar chart
-        svg.selectAll(".bar")
-            .data(data)
-            .enter().append("rect")
-            .attr("class", "bar")
-            .attr("x", function(d) { return x(d.Neighborhood); })
-            .attr("width", x.bandwidth())
-            .attr("y", function(d) { return y(d.Saturday); })
-            .attr("height", function(d) { return height - y(d.Saturday); });
-
-        svg.append("text")
-          .attr("font-size", "25px")
-          .attr("transform","translate(" + (width/50) + " ," + (margin.top/40) + ")")
-          .style("text-anchor", "right")
-          .text("Larceny Theft on Saturday")
-
-        // add the x Axis
-        svg.append("g")
-            .attr("transform", "translate(0," + height + ")")
-            .call(d3.axisBottom(x));
-
-        // add the y Axis
-        svg.append("g")
-            .call(d3.axisLeft(y));
-
-        svg.append("text")
-          .attr("transform", "rotate(-90)")
-          .attr("y", 0 - margin.left)
-          .attr("x",0 - (height / 2))
-          .attr("dy", "1em")
-          .style("text-anchor", "middle")
-          .text("Number of Records");
-
-        // text label for the x axis
-        svg.append("text")
-          .attr("transform","translate(" + (width/2) + " ," + (margin.top/24) + ")")
-          .style("text-anchor", "middle")
-          .text("Saturday");
-
-      });
-
-
-      //____________________1______________________________
-
-      </script>
-      </div>
-</section>
-
-
-
-<section class="section2">
-      <div id="visual2">
+  <section class="section">
+        <div class="container content">
+          <h2>Data Visualizations</h2>
+        </div>
+      <div id="visual1">
         <script src="https://d3js.org/d3.v5.min.js"></script>
-        <style>
-          .bar2 {
-            fill: #808080;
-          }
-        </style>
-          <script>
-
+            <style>
+              .bar {
+                fill: #D27899;
+              }
+            </style>
+        <script>
           // set the dimensions and margins of the graph
-          var margin = {top: 50, right: 75, bottom: 50, left: 100},
+          var margin = {top: 30, right: 20, bottom: 30, left: 200},
               width = 960 - margin.left - margin.right,
               height = 500 - margin.top - margin.bottom;
-
           // set the ranges
           var x = d3.scaleBand()
                     .range([0, width])
-                    .padding(0.2);
+                    .padding(0.1);
           var y = d3.scaleLinear()
                     .range([height, 0]);
-
           // append the svg object to the body of the page
           // append a 'group' element to 'svg'
           // moves the 'group' element to the top left margin
-          var svg2 = d3.select("#visual2").append("svg")
+          var svg = d3.select("body").append("svg")
               .attr("width", width + margin.left + margin.right)
               .attr("height", height + margin.top + margin.bottom)
               .append("g")
-              .attr("transform","translate(" + margin.left + "," + margin.top + ")");
-
-            // get the data
-            d3.csv("data1.csv").then(function(data) {
+              .attr("transform",
+                    "translate(" + margin.left + "," + margin.top + ")");
+          // get the data
+          d3.csv("data1.csv").then(function(data) {
             console.log(data);
-
             // format the data
             data.forEach(function(d) {
               d.Saturday = +d.Saturday;
             });
-
             // Scale the range of the data in the domains
             x.domain(data.map(function(d) { return d.Neighborhood; }));
             y.domain([0, d3.max(data, function(d) { return d.Saturday; })]);
-
             // append the rectangles for the bar chart
-            svg2.selectAll(".bar2")
-                .data(data)
-                .enter().append("rect")
-                .attr("class", "bar2")
-                .attr("x", function(d) { return x(d.Neighborhood); })
-                .attr("width", x.bandwidth())
-                .attr("y", function(d) { return y(d.Saturday); })
-                .attr("height", function(d) { return height - y(d.Saturday); });
+            svg.selectAll(".bar")
+              .data(data)
+              .enter().append("rect")
+              .attr("class", "bar")
+              .attr("x", function(d) { return x(d.Neighborhood); })
+              .attr("width", x.bandwidth())
+              .attr("y", function(d) { return y(d.Saturday); })
+              .attr("height", function(d) { return height - y(d.Saturday); });
+            // add the x Axis
+            svg.append("g")
+              .attr("transform", "translate(0," + height + ")")
+              .call(d3.axisBottom(x));
+            // add the y Axis
+            svg.append("g")
+              .call(d3.axisLeft(y));
 
-            svg2.append("text")
+            svg.append("text")
               .attr("font-size", "25px")
-              .attr("transform","translate(" + (width/50) + " ," + (margin.top/40) + ")")
+              .attr("transform","translate(" + (width-800) + " ," + (margin.top-35) + ")")
               .style("text-anchor", "right")
               .text("Larceny Theft on Saturday")
 
-            // add the x Axis
-            svg2.append("g")
-                .attr("transform", "translate(0," + height + ")")
-                .call(d3.axisBottom(x));
+            svg.append("text")
+               .attr("transform", "rotate(-90)")
+               .attr("y", 150 - margin.left)
+               .attr("x",0 - (height / 2))
+               .attr("dy", "1em")
+               .style("text-anchor", "middle")
+               .text("Number of Records");
+             // text label for the x axis
+             svg.append("text")
+               .attr("transform","translate(" + (width/2) + " ," + (margin.top/24) + ")")
+               .style("text-anchor", "middle")
+               .text("Saturday");
+             });
+        </script>
+      </div>
+    </section>
+  <p><br/>
+    <p><br/>
+      <p><br/>
+  <section class="section2">
+    <div id="visual2">
+      <script src="https://d3js.org/d3.v5.min.js"></script>
+          <style>
+            .bar2 {
+              fill: #E0C6FF;
+            }
+          </style>
+      </script>
+        <script>
+          var data2 = [{"crime":"Other","records":19},{"crime":"Recovered Vehicle","records":19},
+        {"crime":"Suspicious Occ","records":22},{"crime":"Missing Person","records":26},
+        {"crime":"Motor Vehicle Theft","records":27},{"crime":"Burglary","records":33},
+        {"crime":"Against Family and Children","records":35},{"crime":"Robbery","records":37},
+        {"crime":"Malicious Mischief","records":44},{"crime":"Lost Property","records":52},
+        {"crime":"Non-Criminal","records":84},{"crime":"Assault","records":105},{"crime":"Other Miscellaneous","records":113},
+        {"crime":"Warrant","records":117},{"crime":"Drug Offense","records":123},{"crime":"Larceny Theft","records":287}];
 
-            // add the y Axis
-            svg2.append("g")
-                .call(d3.axisLeft(y));
+          // // get the data
+          // d3.csv("data3.csv").then(function(data) {
+          // console.log(data);
 
-            svg2.append("text")
-              .attr("transform", "rotate(-90)")
-              .attr("y", 0 - margin.left)
-              .attr("x",0 - (height / 2))
-              .attr("dy", "1em")
-              .style("text-anchor", "middle")
-              .text("Number of Records");
+          // set the dimensions and margins of the graph
+          var margin2 = {top2: 30, right2: 20, bottom2: 50, left2: 200},
+            width2 = 960 - margin2.left2 - margin2.right2,
+            height2 = 500 - margin2.top2 - margin2.bottom2;
 
-            // text label for the x axis
-            svg2.append("text")
-              .attr("transform","translate(" + (width/2) + " ," + (margin.top/24) + ")")
-              .style("text-anchor", "middle")
-              .text("Saturday");
+          // set the ranges
+          var y2 = d3.scaleBand()
+                  .range([height2, 0])
+                  .padding(0.2);
 
+          var x2 = d3.scaleLinear()
+                  .range([0, width2]);
+
+          // append the svg object to the body of the page
+          // append a 'group' element to 'svg'
+          // moves the 'group' element to the top left margin
+          var svg2 = d3.select("body").append("svg")
+            .attr("width", width2 + margin2.left2 + margin2.right2)
+            .attr("height", height2 + margin2.top2 + margin2.bottom2)
+            .append("g")
+            .attr("transform","translate(" + margin2.left2 + "," + margin2.top2 + ")");
+
+          // format the data
+          data2.forEach(function(d2) {
+            d2.records = +d2.records;
           });
 
+          // Scale the range of the data in the domains
+          x2.domain([0, d3.max(data2, function(d2){ return d2.records; })])
+          y2.domain(data2.map(function(d2) { return d2.crime; }));
 
-          //_________________________2_________________________
+          // append the rectangles for the bar chart
+          svg2.selectAll(".bar2")
+              .data(data2)
+              .enter().append("rect")
+              .attr("class", "bar2")
+              .attr("width", function(d2) {return x2(d2.records); } )
+              .attr("y", function(d2) { return y2(d2.crime); })
+              .attr("height", y2.bandwidth());
 
-          </script>
-          </div>
-    </section>
+          // add the x Axis
+          svg2.append("g")
+              .attr("transform", "translate(0," + height2 + ")")
+              .call(d3.axisBottom(x2));
+
+          // add the y Axis
+          svg2.append("g")
+              .call(d3.axisLeft(y2));
+
+          svg2.append("text")
+              .attr("font-size", "23px")
+              .attr("transform","translate(" + (width2-870) + " ," + (margin2.top2-45) + ")")
+              .style("text-anchor", "right")
+              .text("Most Prevelant Incidents in the Tenderloin")
+
+          svg2.append("text")
+              .attr("transform","translate(" + (width2-870) + " ," + (margin2.top2/24) + ")")
+              .style("text-anchor", "front")
+              .text("Incident Category");
+
+          svg2.append("text")
+              .attr("transform","translate(" + (width2/2) + " ," + (margin2.top2/24) + ")")
+              .style("text-anchor", "front")
+              .text("Tenderloin");
+
+          svg2.append("text")
+              .attr("transform","translate(" + (width2/2-43) + " ," + (margin2.top2-45) + ")")
+              .style("text-anchor", "front")
+              .text("Analysis Neighborhood");
+
+          svg2.append("text")
+              .attr("transform","translate(" + (width2/2-43) + " ," + (margin2.bottom2+410) + ")")
+              .style("text-anchor", "front")
+              .text("Number of Records");
+        </script>
+      </div>
+  </section>
+  <section class="section3">
+    <div id="visual3">
+      <script src="https://d3js.org/d3.v5.min.js"></script>
+          <style>
+            .bar3 {
+              fill: #A0E9EC;
+            }
+          </style>
+      </script>
+      <script>
 
 
-
+      </script>
+    </div>
+  </section>
   <!-- todo: add sections as necessary -->
   <section class="section">
     <div class="container content">
@@ -270,20 +274,11 @@
       <h2>Prototypes</h2>
 
       <img src="Visualization1HW1.jpg" alt="" width="100%" height="400">
-      <b>
-        This visualization represents the Top 5 neighborhoods in San Francisco with the most larceny offenses per day on the weekends.
-      </b>
-
+      <p><br/>
       <img src="Visualization2HW1.jpg" alt="" width="100%" height="400">
-      <b>
-        This visualization represents larceny theft throughout the day taking place in San Francisco. We see how the number of cases increases as the day goes on and reaches its peak late at night.
-      </b>
-
+      <p><br/>
       <img src="Visualization3HW1.jpg" alt="" width="100%" height="400">
-      <b>
-        This visualization represents the type of incidents happening in the Tenderloin by category.
-      </b>
-
+      <p><br/>
       <h3>Interpretation</h3>
 
       <p>
@@ -303,10 +298,8 @@
       </p>
     </div>
   </section>
-
   <!-- separator between sections -->
   <hr class="container">
-
   <!-- grade section -->
   <section class="section">
     <div class="container content">
@@ -393,7 +386,6 @@
       </p>
     </div>
   </section>
-
   <!-- about section -->
   <!-- todo: can fill in, or link to an about page you use for all assignments -->
   <section class="section">
@@ -434,7 +426,6 @@
 
     </div>
   </section>
-
   <!-- footer -->
   <footer class="footer">
     <div class="content has-text-centered">
@@ -452,7 +443,7 @@
       </small>
     </div>
   </footer>
-
 <!-- end body and html -->
 </body>
+
 </html>
