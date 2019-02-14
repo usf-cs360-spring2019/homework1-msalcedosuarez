@@ -68,7 +68,8 @@
       </div>
     </div>
   </section>
-<p><br/>
+  <p><br/>
+
   <section class="section1">
         <div class="container content">
           <h2>Data Visualizations</h2>
@@ -87,7 +88,7 @@
             </style>
         <script>
           // set the dimensions and margins of the graph
-          var margin = {top: 30, right: 20, bottom: 30, left: 200},
+          var margin = {top: 30, right: 20, bottom: 20, left: 200},
               width = 960 - margin.left - margin.right,
               height = 500 - margin.top - margin.bottom;
           // set the ranges
@@ -164,12 +165,13 @@
                .attr("transform","translate(" + (width/2) + " ," + (margin.top-35) + ")")
                .style("text-anchor", "middle")
                .text("Saturday");
-
               });
 
         </script>
       </div>
     </section>
+    <p><br/>
+    <center color="#DDD8DB">This visualization represents the Top 5 neighborhoods with the most larceny offenses on Saturdays. </center>
   <p><br/>
     <p><br/>
       <p><br/>
@@ -279,6 +281,8 @@
     </div>
   </section>
   <p><br/>
+    <center color="#DDD8DB">This visualization represents larceny theft throughout the day taking place in San Francisco. We see how the number
+    of cases increases as the day goes on and reaches its peak late at night. </center>
     <p><br/>
       <p><br/>
   <section class="section3">
@@ -305,7 +309,7 @@
         {"crime":"Warrant","records":117},{"crime":"Drug Offense","records":123},{"crime":"Larceny Theft","records":287}];
 
           // set the dimensions and margins of the graph
-          var margin2 = {top2: 30, right2: 20, bottom2: 50, left2: 200},
+          var margin2 = {top2: 31, right2: 20, bottom2: 50, left2: 200},
             width2 = 960 - margin2.left2 - margin2.right2,
             height2 = 500 - margin2.top2 - margin2.bottom2;
 
@@ -385,11 +389,14 @@
               .attr("class", "grid")
               .attr("transform", "translate(0," + height2 + ")")
               .call(make_x_gridlines()
-                  .tickSize(-height2)
-                  .tickFormat(""))
+              .tickSize(-height2)
+              .tickFormat(""))
+
         </script>
       </div>
   </section>
+  <p><br/>
+    <center color="#DDD8DB">This visualization represents the types of incidents happening in the Tenderloin by crime category. </center>
 
   <!-- todo: add sections as necessary -->
   <section class="section">
