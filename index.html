@@ -17,7 +17,7 @@
     <div class="hero-body">
       <div class="container">
         <h1 class="title">
-          Visualization Assignment
+          Homework 1
         </h1>
         <h2 class="subtitle">
           Martha Salcedo-Suarez
@@ -70,7 +70,7 @@
   </section>
   <p><br/>
 
-  <section class="section1">
+  <section class="section1" style="width:1024px; margin:auto;">
         <div class="container content">
           <h2>Data Visualizations</h2>
         </div>
@@ -80,11 +80,6 @@
               .bar {
                 fill: #D27899;
               }
-              .grid line {
-                  stroke: #EAE8E9;
-                  stroke-opacity: 0.7;
-                  shape-rendering: crispEdges;
-                }
             </style>
         <script>
           // set the dimensions and margins of the graph
@@ -107,12 +102,6 @@
               .attr("transform",
                     "translate(" + margin.left + "," + margin.top + ")");
 
-                    // gridlines in y axis function
-          function make_y_gridlines() {
-              return d3.axisLeft(y)
-                  .ticks(8)
-          }
-
           // get the data
           d3.csv("data1.csv").then(function(data) {
             console.log(data);
@@ -132,12 +121,6 @@
               .attr("width", x.bandwidth())
               .attr("y", function(d) { return y(d.Saturday); })
               .attr("height", function(d) { return height - y(d.Saturday); });
-            // add the Y gridlines
-            svg.append("g")
-                .attr("class", "grid")
-                .call(make_y_gridlines()
-                    .tickSize(-width)
-                    .tickFormat(""))
 
             // add the x Axis
             svg.append("g")
@@ -184,11 +167,6 @@
                 stroke: #A0E9EC;
                 stroke-width: 4px;
               }
-              .grid line {
-                  stroke: #EAE8E9;
-                  stroke-opacity: 0.7;
-                  shape-rendering: crispEdges;
-                }
           </style>
       </script>
       <script>
@@ -214,12 +192,6 @@
             .attr("height", height3 + margin3.top3 + margin3.bottom3)
             .append("g")
             .attr("transform","translate(" + margin3.left3 + "," + margin3.top3 + ")");
-
-            // gridlines in y axis function
-          function make_y_gridlines() {
-              return d3.axisLeft(y)
-                  .ticks(7)
-          }
 
           // Get the data
           d3.csv("data2.csv").then(function(data3) {
@@ -267,14 +239,6 @@
               .attr("dy", "1em")
               .style("text-anchor", "middle")
               .text("Number of Records");
-
-              // add the Y gridlines
-          svg3.append("g")
-              .attr("class", "grid")
-              .call(make_y_gridlines()
-                  .tickSize(-width3)
-                  .tickFormat(""))
-
           });
 
       </script>
@@ -291,11 +255,6 @@
           <style>
             .bar2 {
               fill: #E0C6FF;
-            }
-            .grid line {
-                stroke: #EAE8E9;
-                stroke-opacity: 0.7;
-                shape-rendering: crispEdges;
             }
           </style>
       </script>
@@ -330,6 +289,7 @@
             .append("g")
             .attr("transform","translate(" + margin2.left2 + "," + margin2.top2 + ")");
 
+
           // Scale the range of the data in the domains
           x2.domain([0, d3.max(data2, function(d2){ return d2.records; })])
           y2.domain(data2.map(function(d2) { return d2.crime; }));
@@ -342,12 +302,6 @@
               .attr("width", function(d2) {return x2(d2.records); } )
               .attr("y", function(d2) { return y2(d2.crime); })
               .attr("height", y2.bandwidth());
-
-          // gridlines in x axis function
-          function make_x_gridlines() {
-              return d3.axisBottom(x2)
-                  .ticks(15)
-          }
 
           // add the x Axis
           svg2.append("g")
@@ -383,15 +337,6 @@
               .attr("transform","translate(" + (width2/2-43) + " ," + (margin2.bottom2+410) + ")")
               .style("text-anchor", "front")
               .text("Number of Records");
-
-          // add the X gridlines
-          svg2.append("g")
-              .attr("class", "grid")
-              .attr("transform", "translate(0," + height2 + ")")
-              .call(make_x_gridlines()
-              .tickSize(-height2)
-              .tickFormat(""))
-
         </script>
       </div>
   </section>
@@ -405,28 +350,21 @@
 
       <h2>Prototypes</h2>
 
-      <img src="Visualization1HW1.jpg" alt="" width="100%" height="400">
+      <img src="Visualization1HW1.jpg" alt="" width="960" height="500">
       <p><br/>
-      <img src="Visualization2HW1.jpg" alt="" width="100%" height="400">
+      <img src="Visualization2HW1.jpg" alt="" width="960" height="500">
       <p><br/>
-      <img src="Visualization3HW1.jpg" alt="" width="100%" height="400">
+      <img src="Visualization3HW1.jpg" alt="" width="960" height="500">
       <p><br/>
-      <h3>Interpretation</h3>
-
-      <p>
-        If appropriate, provide a brief discussion of how to interpret this visualization (e.g. how the data is encoded) and how to interact with this visualization. Some of this discussion may not be necessary depending on the legends provided with the visualization.
-      </p>
-
-      <h3>Discussion</h3>
-
-      <p>
-        If appropriate, provide a brief discussion of the primary goal and findings of the visualization, any challenges encountered creating the visualization, and any other context as required by the assignment.
-      </p>
-
       <h3>Credit</h3>
 
       <p>
-        Inspiration from and credit to Scott Murray and d3noob.
+        Inspiration from and credit to:
+        <br>
+        &bullet; Aravind Cheekkallur’s <a href="https://bl.ocks.org/caravinden/eb0e5a2b38c8815919290fa838c6b63b">Horizontal Bar Chart in d3.v4</a>
+        <br>
+        &bullet; d3noob's <a href="https://bl.ocks.org/d3noob/bdf28027e0ce70bd132edc64f1dd7ea4">Simple Bar Graph in v4</a> and
+        <a href="https://bl.ocks.org/d3noob/402dd382a51a4f6eea487f9a35566de0">Simple Line Graph in v4</a>
       </p>
     </div>
   </section>
@@ -513,9 +451,6 @@
         <tbody>
       </table>
 
-      <p>
-        Any additional context you want to provide regarding functionality and grading can be included here. This may include any challenges or bugs you ran into that prevented you from implementing additional functionality.
-      </p>
     </div>
   </section>
   <!-- about section -->
@@ -530,7 +465,7 @@
         <div class="media-left">
           <p class="image is-128x128">
             <!-- todo: replace with your profile image -->
-            <img src="https://bulma.io/images/placeholders/128x128.png">
+            <img src="martha.jpg">
           </p>
         </div>
 
@@ -539,7 +474,7 @@
               <!-- todo: replace with your information -->
               <strong>Martha Salcedo-Suarez</strong>
               <br/>
-              This is a good place to place a brief biography describing your interests and skills, a professional profile photo, and/or links to your Github, Linkedin, and other <em>professional</em> social media accounts.
+              My name is Martha. I am a Senior Computer Science Major and Business Minor. Expected Graduation: December 2019
               <br/>
               <!-- find brand icons at: https://fontawesome.com/icons?d=gallery&s=brands&m=free -->
               <a href="https://github.com/msalcedosuarez">
@@ -555,7 +490,6 @@
 
         </div>
       </div>
-
     </div>
   </section>
   <!-- footer -->
